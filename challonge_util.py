@@ -2,6 +2,8 @@ import requests
 import os
 from dotenv import load_dotenv
 
+load_dotenv()
+
 api_key = os.getenv("CHALLONGE_API_KEY")
 headers = requests.utils.default_headers()
 headers["User-Agent"] = "Space Shuttle"

@@ -9,7 +9,7 @@ from discord.app_commands import checks
 
 import os
 from dotenv import load_dotenv
-
+load_dotenv()
 #Setup intents
 intents = discord.Intents.default()
 intents.message_content = True

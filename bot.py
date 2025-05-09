@@ -302,7 +302,7 @@ async def export_seeding(itx : discord.Interaction,tournament:str):
 async def get_player_count(itx : discord.Interaction):
     if(itx.user.id == 317475187391987713 or itx.user.id == 247221105515823104):
         await db.get_player_counts()
-        await itx.response.send_message("Exported participants",file=discord.File("player_count.csv"))
+        await itx.response.send_message("Exported participants",file=discord.File("player_counts.csv"))
 
 @tree.command(
         name="admin_execute_dql",

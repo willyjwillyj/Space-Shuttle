@@ -150,6 +150,10 @@ async def export_participants():
     db_df = pd.read_sql_query("SELECT * FROM registrations", con)
     db_df.to_csv('database.csv', index=False)
 
+async def get_player_counts():
+    db_df = pd.read_sql_query("SELECT COUNT(discord_username) AS PlayerCount, tournament FROM registrations GROUP BY tournament ORDER BY PlayerCount", con)
+    db_df.to_csv('player_counts.csv', index=False)
+
 async def execute_dql(sql):
     db_df = pd.read_sql_query(sql, con)
     db_df.to_csv('return.csv', index=False)

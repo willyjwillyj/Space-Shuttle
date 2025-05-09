@@ -294,13 +294,24 @@ async def export_seeding(itx : discord.Interaction,tournament:str):
         await itx.response.send_message("Exported participants",file=discord.File("seeding.csv"))
 
 @tree.command(
+        name="get_player_count",
+        description="get player Counts",
+        guild=discord.Object(id=server_id),
+)
+@checks.has_role("Big Galactic")
+async def get_player_count(itx : discord.Interaction):
+    if(itx.user.id == 317475187391987713 or itx.user.id == 247221105515823104):
+        await db.get_player_counts()
+        await itx.response.send_message("Exported participants",file=discord.File("player_count.csv"))
+
+@tree.command(
         name="admin_execute_dql",
         description="ADMIN ONLY",
         guild=discord.Object(id=server_id),
 )
 @checks.has_role("Big Galactic")
 async def execute_dql(itx : discord.Interaction,sql:str):
-    if(itx.user.id == 317475187391987713 or itx.user.id == 247221105515823104):
+    if(itx.user.id == 317475187391987713):
         await db.execute_dql(sql)
         await itx.response.send_message("Executed DQL Query",file=discord.File("return.csv"))
 

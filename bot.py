@@ -77,7 +77,7 @@ class GCL_Regsiter(discord.ui.View):
     def __init__(self, *, timeout = None):
         super().__init__(timeout=timeout)
 
-    @discord.ui.button(label="TETR.IO")
+    @discord.ui.button(label="TETR.IO", custom_id="tetrio_reg")
     async def reg_tetrio(self, itx: discord.Interaction, button: discord.ui.Button):
         if(await db.check_if_player_registered(itx.user.id,"TETR.IO")):
             message = await db.register_player(itx.user.id,itx.user.name,None,"TETR.IO")
@@ -87,7 +87,7 @@ class GCL_Regsiter(discord.ui.View):
         else:
             await itx.response.send_modal(TETRIOmodal())
 
-    @discord.ui.button(label="Zone Battle")
+    @discord.ui.button(label="Zone Battle", custom_id="zone_reg")
     async def reg_zb(self, itx: discord.Interaction, button: discord.ui.Button):
         if(await db.check_if_player_registered(itx.user.id,"Zone Battle")):
             message = await db.register_player(itx.user.id,itx.user.name,None,"Zone Battle")
@@ -97,7 +97,7 @@ class GCL_Regsiter(discord.ui.View):
         else:
             await itx.response.send_modal(ZBmodal())
 
-    @discord.ui.button(label="Classic Score Attack")
+    @discord.ui.button(label="Classic Score Attack", custom_id = "csa_reg")
     async def reg_csa(self, itx: discord.Interaction, button: discord.ui.Button):
         if(await db.check_if_player_registered(itx.user.id,"Classic Score Attack")):
             message = await db.register_player(itx.user.id,itx.user.name,None,"Classic Score Attack")
@@ -107,7 +107,7 @@ class GCL_Regsiter(discord.ui.View):
         else:
             await itx.response.send_modal(CSAmodal())
 
-    @discord.ui.button(label="Puyo Puyo Tetris 2")
+    @discord.ui.button(label="Puyo Puyo Tetris 2", custom_id="ppt_reg")
     async def reg_ppt2(self, itx: discord.Interaction, button: discord.ui.Button):
         if(await db.check_if_player_registered(itx.user.id,"Puyo Puyo Tetris 2")):
             message = await db.register_player(itx.user.id,itx.user.name,None,"Puyo Puyo Tetris 2")
@@ -117,7 +117,7 @@ class GCL_Regsiter(discord.ui.View):
         else:
             await itx.response.send_modal(PPT2modal())
 
-    @discord.ui.button(label="Puyo Puyo Champions")
+    @discord.ui.button(label="Puyo Puyo Champions", custom_id="ppc_reg")
     async def reg_ppc(self, itx: discord.Interaction, button: discord.ui.Button):
         if(await db.check_if_player_registered(itx.user.id,"Puyo Puyo Champions")):
             message = await db.register_player(itx.user.id,itx.user.name,None,"Puyo Puyo Champions")
@@ -328,6 +328,7 @@ async def execute_dml(itx : discord.Interaction,sql:str):
 
 @client.event
 async def on_ready():
+    client.add_view(GCL_Regsiter())
     print(f'We have logged in as {client.user}')
     await tree.sync(guild=discord.Object(id=server_id))
     print("commands registered")
